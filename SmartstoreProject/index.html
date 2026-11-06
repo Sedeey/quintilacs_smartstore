@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171a18">
+  <title>Redline Supply | Motorcycle Parts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #171a18;
+      --muted: #747873;
+      --paper: #f3f4ef;
+      --white: #fff;
+      --line: #dedfd9;
+      --orange: #e85c32;
+      --lime: #c9ef55;
+      --blue: #477b88;
+      --display: "Barlow Condensed", Impact, sans-serif;
+      --body: "DM Sans", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: var(--ink); background: var(--paper); font-family: var(--body); }
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+    a { color: inherit; text-decoration: none; }
+    .topline { display: flex; justify-content: center; align-items: center; gap: 8px; padding: 9px 16px; background: var(--lime); font-size: 11px; font-weight: 700; letter-spacing: .04em; }
+    .topline span { color: #536320; }
+    .site-header { background: var(--ink); color: var(--white); }
+    .nav { width: min(1280px, calc(100% - 48px)); min-height: 76px; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 11px; min-width: max-content; }
+    .brand-mark { width: 34px; height: 34px; display: grid; place-items: center; color: var(--ink); background: var(--orange); font-family: var(--display); font-size: 21px; font-weight: 800; transform: skew(-8deg); }
+    .brand-name { font-family: var(--display); font-size: 22px; font-weight: 800; letter-spacing: .035em; line-height: .9; }
+    .brand-name small { display: block; margin-top: 5px; color: #9da29c; font-family: var(--body); font-size: 8px; font-weight: 700; letter-spacing: .22em; }
+    .nav-links { display: flex; gap: 30px; color: #c3c6c1; font-size: 12px; font-weight: 600; }
+    .nav-links a:hover { color: var(--lime); }
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
+    .icon-button { min-width: 42px; height: 42px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid #444945; background: transparent; color: white; font-size: 12px; font-weight: 700; }
+    .icon-button:hover { border-color: var(--lime); }
+    .cart-count { min-width: 18px; height: 18px; display: inline-grid; place-items: center; padding: 0 4px; background: var(--orange); font-size: 10px; }
+    .hero { position: relative; min-height: 425px; overflow: hidden; color: #fff; background: #222927; }
+    .hero::before { position: absolute; inset: 0; content: ""; background: linear-gradient(90deg, rgba(15,19,17,.92) 0%, rgba(15,19,17,.76) 38%, rgba(15,19,17,.06) 100%), url("https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=2200&q=88") center 54% / cover; }
+    .hero-content { position: relative; width: min(1280px, calc(100% - 48px)); margin: auto; padding: 80px 0 78px; }
+    .eyebrow { display: flex; align-items: center; gap: 9px; color: var(--lime); font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+    .eyebrow::before { width: 24px; height: 2px; content: ""; background: var(--orange); }
+    h1 { max-width: 590px; margin: 17px 0 12px; font-family: var(--display); font-size: clamp(54px, 7vw, 88px); font-weight: 800; line-height: .86; letter-spacing: .015em; text-transform: uppercase; }
+    .hero p { max-width: 410px; margin: 20px 0 26px; color: #d3d5d0; font-size: 14px; line-height: 1.65; }
+    .primary-button { min-height: 46px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 0 20px; border: 0; background: var(--orange); color: white; font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; transition: background .2s, transform .2s; }
+    .primary-button:hover { background: #cf4822; transform: translateY(-2px); }
+    .hero-note { display: inline-flex; align-items: center; gap: 9px; margin-left: 18px; color: #d3d5d0; font-size: 11px; }
+    .hero-note b { color: var(--lime); font-size: 14px; }
+    .benefits { display: grid; grid-template-columns: repeat(4, 1fr); background: #fff; border-bottom: 1px solid var(--line); }
+    .benefit { min-height: 82px; display: flex; align-items: center; justify-content: center; gap: 12px; border-right: 1px solid var(--line); }
+    .benefit:last-child { border: 0; }
+    .benefit-icon { color: var(--orange); font-size: 20px; }
+    .benefit strong { display: block; font-size: 11px; }
+    .benefit small { display: block; margin-top: 4px; color: var(--muted); font-size: 10px; }
+    .main { width: min(1280px, calc(100% - 48px)); margin: auto; padding: 58px 0 72px; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 23px; }
+    .kicker { color: var(--orange); font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+    h2 { margin: 7px 0 0; font-family: var(--display); font-size: 40px; font-weight: 700; line-height: 1; text-transform: uppercase; }
+    .results-count { color: var(--muted); font-size: 11px; }
+    .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .categories { display: flex; flex-wrap: wrap; gap: 7px; }
+    .category { min-height: 34px; padding: 0 13px; border: 1px solid transparent; background: transparent; color: #626761; font-size: 11px; font-weight: 600; }
+    .category:hover, .category.active { border-color: var(--ink); background: var(--ink); color: white; }
+    .toolbar-right { display: flex; gap: 9px; }
+    .search { width: 210px; height: 36px; display: flex; align-items: center; gap: 8px; padding: 0 10px; border: 1px solid var(--line); background: #fff; }
+    .search input { width: 100%; border: 0; outline: 0; font-size: 11px; }
+    .search-icon { color: var(--muted); font-size: 16px; }
+    .sort { height: 36px; padding: 0 29px 0 10px; border: 1px solid var(--line); background: #fff; color: var(--ink); font-size: 11px; }
+    .product-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; padding-top: 21px; }
+    .product { position: relative; min-width: 0; background: #fff; border: 1px solid #e8e9e3; transition: transform .2s, box-shadow .2s; }
+    .product:hover { transform: translateY(-3px); box-shadow: 0 10px 24px #171a1814; }
+    .product-image { position: relative; aspect-ratio: 1.32; overflow: hidden; background: #fff; }
+    .product-image img { width: 100%; height: 100%; display: block; object-fit: contain; transition: transform .4s; }
+    .product-image img.cover { object-fit: cover; }
+    .product-image img.cover-right { object-fit: cover; object-position: right center; }
+    .product:hover .product-image img { transform: scale(1.04); }
+    .tag { position: absolute; top: 11px; left: 11px; padding: 6px 8px; background: var(--lime); color: var(--ink); font-size: 9px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+    .photo-credit { position: absolute; right: 7px; bottom: 7px; display: flex; gap: 5px; max-width: calc(100% - 14px); padding: 4px 6px; background: #171a18d9; color: #fff; font-size: 8px; line-height: 1.2; }
+    .photo-credit a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+    .stock-dot { display: inline-block; width: 6px; height: 6px; margin-right: 5px; border-radius: 50%; background: #59a36d; }
+    .product-copy { padding: 14px 14px 13px; }
+    .product-category { color: var(--muted); font-size: 9px; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; }
+    .product h3 { min-height: 38px; margin: 7px 0 8px; font-family: var(--display); font-size: 19px; font-weight: 600; line-height: 1.05; text-transform: uppercase; }
+    .product-meta { display: flex; justify-content: space-between; color: var(--muted); font-size: 10px; }
+    .product-bottom { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 15px; padding-top: 11px; border-top: 1px solid #ecece8; }
+    .price { font-size: 15px; font-weight: 700; }
+    .add-button { width: 34px; height: 34px; display: grid; place-items: center; border: 0; background: var(--ink); color: #fff; font-size: 20px; transition: background .2s; }
+    .add-button:hover { background: var(--orange); }
+    .empty-state { grid-column: 1 / -1; padding: 50px 20px; color: var(--muted); text-align: center; }
+    .lab-section { padding: 30px 0 0; }
+    .lab-toggle { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 17px 19px; border: 1px solid var(--line); background: #e9ebe5; text-align: left; }
+    .lab-toggle strong { font-family: var(--display); font-size: 21px; text-transform: uppercase; }
+    .lab-toggle span { color: var(--muted); font-size: 11px; }
+    .lab-panel { display: none; grid-template-columns: 1fr 1.1fr; gap: 22px; padding: 22px; border: 1px solid var(--line); border-top: 0; background: #fff; }
+    .lab-panel.open { display: grid; }
+    .lab-copy h3 { margin: 0 0 8px; font-family: var(--display); font-size: 24px; text-transform: uppercase; }
+    .lab-copy p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+    .lab-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 15px; }
+    .lab-controls label { color: var(--muted); font-size: 11px; }
+    .lab-controls select { height: 35px; border: 1px solid var(--line); background: #fff; font-size: 11px; }
+    .lab-controls .primary-button { min-height: 35px; padding: 0 13px; font-size: 10px; }
+    .lab-output { min-height: 120px; padding: 13px; background: #171a18; color: #d1d8cf; font: 11px/1.7 Consolas, monospace; }
+    .lab-output .ok { color: var(--lime); }
+    .lab-output .warn { color: #ff9a76; }
+    .lab-output .dim { color: #8d978d; }
+    footer { background: var(--ink); color: white; }
+    .footer-inner { width: min(1280px, calc(100% - 48px)); margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 85px; }
+    .footer-copy { color: #9da29c; font-size: 10px; }
+    .footer-links { display: flex; gap: 20px; color: #d3d5d0; font-size: 10px; }
+    .overlay { position: fixed; inset: 0; z-index: 4; display: none; background: #0e100f8c; }
+    .overlay.open { display: block; }
+    .cart-drawer { position: fixed; z-index: 5; top: 0; right: 0; width: min(430px, 100%); height: 100dvh; display: flex; flex-direction: column; background: #fff; transform: translateX(102%); transition: transform .28s ease; }
+    .cart-drawer.open { transform: translateX(0); }
+    .drawer-head { display: flex; align-items: center; justify-content: space-between; padding: 20px; border-bottom: 1px solid var(--line); }
+    .drawer-head h2 { margin: 0; font-size: 27px; }
+    .close-button { width: 35px; height: 35px; border: 1px solid var(--line); background: #fff; font-size: 19px; }
+    .drawer-view[hidden] { display: none; }
+    .cart-view { min-height: 0; display: flex; flex: 1; flex-direction: column; }
+    .cart-items { flex: 1; overflow: auto; padding: 10px 20px; }
+    .cart-empty { padding: 50px 10px; color: var(--muted); font-size: 13px; text-align: center; }
+    .cart-line { display: grid; grid-template-columns: 66px 1fr auto; gap: 12px; align-items: center; padding: 13px 0; border-bottom: 1px solid var(--line); }
+    .cart-line img { width: 66px; height: 62px; object-fit: cover; background: var(--paper); }
+    .cart-line h3 { margin: 0 0 5px; font-family: var(--display); font-size: 16px; text-transform: uppercase; }
+    .cart-line p { margin: 0; color: var(--muted); font-size: 11px; }
+    .quantity { display: flex; align-items: center; gap: 9px; margin-top: 8px; }
+    .quantity button { width: 23px; height: 23px; border: 1px solid var(--line); background: #fff; }
+    .quantity span { font-size: 11px; }
+    .line-total { align-self: start; padding-top: 3px; font-size: 12px; font-weight: 700; }
+    .drawer-foot { padding: 17px 20px 22px; border-top: 1px solid var(--line); }
+    .subtotal { display: flex; justify-content: space-between; margin-bottom: 9px; font-size: 13px; font-weight: 700; }
+    .shipping-note { margin: 0 0 14px; color: var(--muted); font-size: 10px; }
+    .checkout { width: 100%; }
+    .checkout:disabled { cursor: not-allowed; background: #a7aaa4; }
+    .checkout-view { flex: 1; overflow: auto; padding: 20px; }
+    .checkout-view h3 { margin: 0 0 6px; font-family: var(--display); font-size: 24px; text-transform: uppercase; }
+    .checkout-intro { margin: 0 0 20px; color: var(--muted); font-size: 11px; line-height: 1.5; }
+    .checkout-form { display: grid; gap: 14px; }
+    .checkout-form label, .payment-legend { display: grid; gap: 6px; font-size: 11px; font-weight: 700; }
+    .checkout-form input, .checkout-form textarea { width: 100%; min-height: 40px; padding: 10px; border: 1px solid var(--line); border-radius: 0; background: #fff; color: var(--ink); font-size: 12px; }
+    .checkout-form textarea { min-height: 76px; resize: vertical; }
+    .payment-options { display: grid; gap: 8px; margin: 0; padding: 0; border: 0; }
+    .payment-options legend { margin-bottom: 8px; }
+    .payment-option { display: flex !important; grid-template-columns: auto 1fr; align-items: center; gap: 9px !important; min-height: 40px; padding: 0 10px; border: 1px solid var(--line); font-weight: 600 !important; }
+    .payment-option input { width: 15px; min-height: auto; height: 15px; margin: 0; accent-color: var(--orange); }
+    .checkout-summary { display: flex; justify-content: space-between; padding: 13px 0; border-top: 1px solid var(--line); font-size: 12px; font-weight: 700; }
+    .checkout-actions { display: grid; gap: 9px; }
+    .back-to-cart { min-height: 40px; border: 1px solid var(--line); background: #fff; color: var(--ink); font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+    .payment-note { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.5; }
+    .toast { position: fixed; z-index: 8; right: 22px; bottom: 22px; max-width: calc(100% - 44px); padding: 13px 17px; background: var(--ink); color: white; font-size: 12px; box-shadow: 0 8px 26px #0003; transform: translateY(18px); opacity: 0; pointer-events: none; transition: .2s; }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    @media (max-width: 900px) {
+      .nav-links { gap: 15px; }
+      .product-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .hero { min-height: 390px; }
+    }
+    @media (max-width: 650px) {
+      .nav { width: calc(100% - 30px); min-height: 66px; }
+      .nav-links { display: none; }
+      .brand-name { font-size: 19px; }
+      .nav-actions .icon-button:first-child { display: none; }
+      .hero { min-height: 400px; }
+      .hero::before { background-position: 61% center; }
+      .hero-content { width: calc(100% - 38px); padding: 67px 0 58px; }
+      h1 { max-width: 430px; font-size: 61px; }
+      .hero p { max-width: 325px; font-size: 13px; }
+      .hero-note { margin: 16px 0 0; }
+      .benefits { grid-template-columns: repeat(2, 1fr); }
+      .benefit { min-height: 71px; justify-content: flex-start; padding-left: 20px; border-bottom: 1px solid var(--line); }
+      .benefit:nth-child(2) { border-right: 0; }
+      .benefit:nth-child(3), .benefit:nth-child(4) { border-bottom: 0; }
+      .main { width: calc(100% - 30px); padding-top: 43px; }
+      .section-heading { align-items: start; }
+      h2 { font-size: 35px; }
+      .toolbar { align-items: stretch; flex-direction: column; }
+      .toolbar-right { display: grid; grid-template-columns: 1fr auto; }
+      .search { width: 100%; }
+      .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+      .product-copy { padding: 11px; }
+      .product h3 { min-height: 36px; font-size: 17px; }
+      .product-meta { font-size: 9px; }
+      .lab-panel { grid-template-columns: 1fr; padding: 16px; }
+      .footer-inner { width: calc(100% - 30px); align-items: flex-start; flex-direction: column; justify-content: center; padding: 19px 0; }
+      .footer-links { flex-wrap: wrap; gap: 12px; }
+    }
+    @media (max-width: 370px) {
+      .product-grid { grid-template-columns: 1fr; }
+      .product-image { aspect-ratio: 1.6; }
+      .category { padding: 0 9px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topline"><span>FREE SHIPPING</span> on orders over ₱100 <span>•</span> Built for the long way around</div>
+  <header class="site-header">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="Redline Supply home"><span class="brand-mark">R</span><span class="brand-name">REDLINE SUPPLY<small>RIDE HARD. FIT RIGHT.</small></span></a>
+      <div class="nav-links"><a href="#shop">Shop parts</a><a href="#shop" data-filter-link="Riding Gear">Riding gear</a><a href="#lab">Workshop</a></div>
+      <div class="nav-actions"><button class="icon-button" id="searchFocus" title="Search products" aria-label="Focus product search">⌕</button><button class="icon-button" id="openCart" aria-label="Open shopping cart">Bag <span class="cart-count" id="cartCount">0</span></button></div>
+    </nav>
+  </header>
+  <main id="top">
+    <section class="hero" aria-label="Motorcycle parts and riding gear">
+      <div class="hero-content"><div class="eyebrow">Parts for the ride ahead</div><h1>Make every<br>mile count.</h1><p>Purpose-built parts and gear for riders who know the best roads don't come with a map.</p><a class="primary-button" href="#shop">Shop the collection <span aria-hidden="true">↗</span></a><span class="hero-note"><b>●</b> Trusted by riders since 2014</span></div>
+    </section>
+    <section class="benefits" aria-label="Store benefits">
+      <div class="benefit"><span class="benefit-icon">↗</span><div><strong>Free shipping ₱100+</strong><small>On qualifying orders</small></div></div>
+      <div class="benefit"><span class="benefit-icon">◷</span><div><strong>Fast dispatch</strong><small>Out the door in 1 business day</small></div></div>
+      <div class="benefit"><span class="benefit-icon">⌁</span><div><strong>Rider-approved</strong><small>Tested where it matters</small></div></div>
+      <div class="benefit"><span class="benefit-icon">↩</span><div><strong>Easy returns</strong><small>30 days to get it right</small></div></div>
+    </section>
+    <section class="main" id="shop">
+      <div class="section-heading"><div><div class="kicker">Built for your machine</div><h2>Shop the parts</h2></div><div class="results-count" id="resultsCount"></div></div>
+      <div class="toolbar">
+        <div class="categories" id="categories" aria-label="Filter by category"></div>
+        <div class="toolbar-right"><label class="search"><span class="search-icon" aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="Search parts and gear" aria-label="Search parts and gear"></label><select class="sort" id="sortSelect" aria-label="Sort products"><option value="featured">Featured</option><option value="price-low">Price: low to high</option><option value="price-high">Price: high to low</option><option value="name">Name: A to Z</option></select></div>
+      </div>
+      <div class="product-grid" id="productGrid" aria-live="polite"></div>
+      <section class="lab-section" id="lab">
+        <button class="lab-toggle" id="labToggle" aria-expanded="false"><strong>Transaction lab</strong><span>Database transactions & concurrency control　＋</span></button>
+        <div class="lab-panel" id="labPanel">
+          <div class="lab-copy"><h3>Race the last part</h3><p>Two riders attempt to buy the remaining stock at the same time. Compare an unsafe read-then-write transaction with optimistic version checking. The safe transaction commits only if the inventory version is unchanged.</p><div class="lab-controls"><label for="isolationSelect">Control strategy</label><select id="isolationSelect"><option value="unsafe">No concurrency control</option><option value="optimistic">Optimistic locking</option></select><button class="primary-button" id="runRace">Run concurrent checkout</button></div></div>
+          <div class="lab-output" id="labOutput" aria-live="polite"><span class="dim">Ready. Select a control strategy and run the transaction.</span></div>
+        </div>
+      </section>
+    </section>
+  </main>
+  <footer><div class="footer-inner"><a class="brand" href="#top"><span class="brand-mark">R</span><span class="brand-name">REDLINE SUPPLY<small>RIDE HARD. FIT RIGHT.</small></span></a><div class="footer-copy">© 2026 Redline Supply. Built for the ride.</div><div class="footer-links"><a href="#shop">Parts & accessories</a><a href="#lab">Transaction lab</a><a href="mailto:hello@redlinesupply.example">Contact</a></div></div></footer>
+  <div class="overlay" id="overlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart" aria-hidden="true">
+    <div class="drawer-head"><h2><span id="drawerTitle">Your bag</span> <span id="drawerCount">(0)</span></h2><button class="close-button" id="closeCart" aria-label="Close shopping cart">×</button></div>
+    <div class="drawer-view cart-view" id="cartView">
+      <div class="cart-items" id="cartItems"></div>
+      <div class="drawer-foot"><div class="subtotal"><span>Subtotal</span><span id="subtotal">₱0.00</span></div><p class="shipping-note" id="shippingNote">Shipping and taxes calculated at checkout.</p><button class="primary-button checkout" id="checkoutButton" disabled>Secure checkout　→</button></div>
+    </div>
+    <section class="drawer-view checkout-view" id="checkoutView" aria-labelledby="checkoutHeading" hidden>
+      <h3 id="checkoutHeading">Delivery & payment</h3>
+      <p class="checkout-intro">Step 2 of 2 · Enter your delivery details and choose how you would like to pay.</p>
+      <form class="checkout-form" id="checkoutForm">
+        <label for="customerName">Full name
+          <input id="customerName" name="name" autocomplete="name" required>
+        </label>
+        <label for="deliveryAddress">Delivery address
+          <textarea id="deliveryAddress" name="address" autocomplete="street-address" required></textarea>
+        </label>
+        <label for="contactNumber">Contact number
+          <input id="contactNumber" name="phone" type="tel" autocomplete="tel" inputmode="tel" required>
+        </label>
+        <fieldset class="payment-options">
+          <legend class="payment-legend">Payment method</legend>
+          <label class="payment-option"><input type="radio" name="payment" value="GCash" required> GCash</label>
+          <label class="payment-option"><input type="radio" name="payment" value="Maya"> Maya</label>
+          <label class="payment-option"><input type="radio" name="payment" value="Credit/debit card"> Credit/debit card</label>
+        </fieldset>
+        <div class="checkout-summary"><span>Order subtotal</span><span id="checkoutTotal">₱0.00</span></div>
+        <div class="checkout-actions">
+          <button class="primary-button checkout" type="submit">Place demo order　→</button>
+          <button class="back-to-cart" id="backToCart" type="button">← Back to bag</button>
+        </div>
+        <p class="payment-note">Demo checkout only. No payment is collected or processed.</p>
+      </form>
+    </section>
+  </aside>
+  <div class="toast" id="toast" role="status"></div>
+  <script>
+    const products = [
+      { id: 1, name: "V2 Ceramic Brake Pads", category: "Brakes", fit: "Universal · Street", price: 42, stock: 8, tag: "Bestseller", image: "images/parts/brake-pads.jpg", imageFit: "contain", imageCredit: "Braker1234", imageSource: "https://commons.wikimedia.org/wiki/File:Aisobrake1.jpg", imageLicense: "CC BY-SA 4.0", imageLicenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/", alt: "Close-up product photo of motorcycle disc brake pads" },
+      { id: 2, name: "Forge 7/8 Handlebar", category: "Controls", fit: "22 mm · Matte black", price: 89, stock: 4, tag: "New", image: "images/parts/handlebar.jpg", imageFit: "cover", imageCredit: "Shixart1985", imageSource: "https://commons.wikimedia.org/wiki/File:Detailed_view_of_a_motorcycle_dashboard_and_handlebar_with_a_smartphone_mount.jpg", imageLicense: "CC BY 2.0", imageLicenseUrl: "https://creativecommons.org/licenses/by/2.0/", alt: "Close-up of black motorcycle handlebars and controls" },
+      { id: 3, name: "Dainese Racing Gloves", category: "Riding Gear", fit: "Armored · Motorcycle use", price: 76, stock: 12, tag: "Rider pick", image: "images/parts/gloves.jpg", imageFit: "contain", imageCredit: "lmnop88a", imageSource: "https://commons.wikimedia.org/wiki/File:Dainese_racing_gloves.jpg", imageLicense: "CC BY 2.0", imageLicenseUrl: "https://creativecommons.org/licenses/by/2.0/", alt: "Armored Dainese motorcycle racing gloves" },
+      { id: 4, name: "Motorcycle Headlamp Assembly", category: "Electrical", fit: "Front-mounted · Motorcycle", price: 118, stock: 3, tag: "Low stock", image: "images/parts/headlight.jpg", imageFit: "cover", imageCredit: "Hunini", imageSource: "https://commons.wikimedia.org/wiki/File:JGSDF_Police_Motorcycle_(YAMAHA_MT-03,_11-0476)_headlamp_front_view_at_Camp_Uji_September_14,_2024.jpg", imageLicense: "CC BY-SA 4.0", imageLicenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/", alt: "Front close-up showing a motorcycle headlamp assembly" },
+      { id: 5, name: "Motorcycle Exhaust Muffler", category: "Exhaust", fit: "Stainless · 2 in inlet", price: 214, stock: 6, tag: "Shop favorite", image: "images/parts/exhaust.jpg", imageFit: "contain", imageCredit: "Ducati muffler (author unlisted)", imageSource: "https://commons.wikimedia.org/wiki/File:Ducati_muffler.jpg", imageLicense: "CC BY 2.0", imageLicenseUrl: "https://creativecommons.org/licenses/by/2.0/", alt: "Motorcycle exhaust muffler mounted beside the rear wheel" },
+      { id: 6, name: "Trailmark Tank Bag", category: "Luggage", fit: "12L · Quick release", price: 97, stock: 9, tag: "New color", image: "images/parts/tank-bag.jpg", imageFit: "cover", imageCredit: "Igch04ab", imageSource: "https://commons.wikimedia.org/wiki/File:Leather_tank_bag_produced_by_Oaks_%26_Phoenix_Denmark_-_Oct_2018.jpg", imageLicense: "CC BY-SA 4.0", imageLicenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/", alt: "Motorcycle tank bag fitted on a motorcycle fuel tank" },
+      { id: 7, name: "Brake & Clutch Levers", category: "Controls", fit: "Pair · Motorcycle controls", price: 64, stock: 7, tag: "Precision", image: "images/parts/brake-clutch-levers.jpg", imageFit: "cover", imageCredit: "Khaosaming", imageSource: "https://commons.wikimedia.org/wiki/File:Honda_VTR250_2009_Handlebar.JPG", imageLicense: "CC BY-SA 3.0", imageLicenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/", alt: "Brake and clutch levers on a Honda VTR250 handlebar" },
+      { id: 8, name: "KBC Full-Face Helmet", category: "Riding Gear", fit: "Black · Full-face", price: 329, stock: 5, tag: "Premium", image: "images/parts/helmet.jpg", imageFit: "contain", imageCredit: "Amoore", imageSource: "https://commons.wikimedia.org/wiki/File:BlackFullCoverageMotorcycleHelmet.jpg", imageLicense: "CC BY-SA 3.0", imageLicenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/", alt: "Black KBC full-face motorcycle helmet with visor" }
+    ];
+    const categories = ["All parts", ...new Set(products.map(product => product.category))];
+    const cart = new Map();
+    let activeCategory = "All parts";
+    const currency = amount => new Intl.NumberFormat("en-PH", { style: "currency", currency: "PHP" }).format(amount);
+    const grid = document.getElementById("productGrid");
+    const categoryBar = document.getElementById("categories");
+    const searchInput = document.getElementById("searchInput");
+    const sortSelect = document.getElementById("sortSelect");
+    const toast = document.getElementById("toast");
+    let toastTimer;
+
+    function renderCategories() {
+      categoryBar.innerHTML = categories.map(category => `<button class="category${category === activeCategory ? " active" : ""}" data-category="${category}" aria-pressed="${category === activeCategory}">${category}</button>`).join("");
+    }
+    function renderProducts() {
+      const query = searchInput.value.trim().toLowerCase();
+      let shown = products.filter(product => (activeCategory === "All parts" || product.category === activeCategory) && `${product.name} ${product.category} ${product.fit}`.toLowerCase().includes(query));
+      const sort = sortSelect.value;
+      if (sort === "price-low") shown.sort((a, b) => a.price - b.price);
+      if (sort === "price-high") shown.sort((a, b) => b.price - a.price);
+      if (sort === "name") shown.sort((a, b) => a.name.localeCompare(b.name));
+      document.getElementById("resultsCount").textContent = `${shown.length} ${shown.length === 1 ? "item" : "items"}`;
+      grid.innerHTML = shown.length ? shown.map(product => `<article class="product"><div class="product-image"><img class="${product.imageFit}" src="${product.image}" alt="${product.alt}" loading="lazy"><span class="tag">${product.tag}</span><div class="photo-credit"><a href="${product.imageSource}" target="_blank" rel="noopener noreferrer">Photo: ${product.imageCredit}</a><a href="${product.imageLicenseUrl}" target="_blank" rel="noopener noreferrer">${product.imageLicense}</a></div></div><div class="product-copy"><div class="product-category">${product.category}</div><h3>${product.name}</h3><div class="product-meta"><span>${product.fit}</span><span><i class="stock-dot"></i>${product.stock} in stock</span></div><div class="product-bottom"><span class="price">${currency(product.price)}</span><button class="add-button" data-add="${product.id}" aria-label="Add ${product.name} to bag" title="Add to bag">+</button></div></div></article>`).join("") : `<div class="empty-state">No parts match that search. Try another term or category.</div>`;
+    }
+    function notify(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 2400);
+    }
+    function addToCart(id) {
+      const product = products.find(item => item.id === Number(id));
+      const current = cart.get(product.id) || 0;
+      if (current >= product.stock) return notify("That's all the available stock for this item.");
+      cart.set(product.id, current + 1);
+      renderCart();
+      notify(`${product.name} added to your bag`);
+    }
+    function renderCart() {
+      const count = [...cart.values()].reduce((sum, quantity) => sum + quantity, 0);
+      const subtotal = [...cart].reduce((sum, [id, quantity]) => sum + products.find(item => item.id === id).price * quantity, 0);
+      document.getElementById("cartCount").textContent = count;
+      document.getElementById("drawerCount").textContent = `(${count})`;
+      document.getElementById("subtotal").textContent = currency(subtotal);
+      document.getElementById("checkoutTotal").textContent = currency(subtotal);
+      document.getElementById("shippingNote").textContent = subtotal >= 100 ? "You qualify for free shipping." : `You're ${currency(100 - subtotal)} away from free shipping.`;
+      document.getElementById("checkoutButton").disabled = count === 0;
+      document.getElementById("cartItems").innerHTML = count ? [...cart].map(([id, quantity]) => {
+        const product = products.find(item => item.id === id);
+        return `<div class="cart-line"><img src="${product.image}" alt=""><div><h3>${product.name}</h3><p>${currency(product.price)} each</p><div class="quantity"><button data-quantity="${id}" data-delta="-1" aria-label="Remove one ${product.name}">−</button><span>${quantity}</span><button data-quantity="${id}" data-delta="1" aria-label="Add one ${product.name}">+</button></div></div><span class="line-total">${currency(product.price * quantity)}</span></div>`;
+      }).join("") : `<div class="cart-empty">Your bag is ready for its first upgrade.</div>`;
+    }
+    function setCartOpen(open) {
+      document.getElementById("cartDrawer").classList.toggle("open", open);
+      document.getElementById("cartDrawer").setAttribute("aria-hidden", String(!open));
+      document.getElementById("overlay").classList.toggle("open", open);
+    }
+    function setCheckoutView(show) {
+      document.getElementById("cartView").hidden = show;
+      document.getElementById("checkoutView").hidden = !show;
+      document.getElementById("drawerTitle").textContent = show ? "Checkout" : "Your bag";
+    }
+
+    categoryBar.addEventListener("click", event => {
+      const button = event.target.closest("[data-category]");
+      if (!button) return;
+      activeCategory = button.dataset.category;
+      renderCategories();
+      renderProducts();
+    });
+    document.addEventListener("click", event => {
+      const addButton = event.target.closest("[data-add]");
+      if (addButton) addToCart(addButton.dataset.add);
+      const quantityButton = event.target.closest("[data-quantity]");
+      if (quantityButton) {
+        const id = Number(quantityButton.dataset.quantity);
+        const next = (cart.get(id) || 0) + Number(quantityButton.dataset.delta);
+        if (next <= 0) cart.delete(id);
+        else if (next <= products.find(item => item.id === id).stock) cart.set(id, next);
+        else notify("That's all the available stock for this item.");
+        renderCart();
+      }
+    });
+    searchInput.addEventListener("input", renderProducts);
+    sortSelect.addEventListener("change", renderProducts);
+    document.getElementById("searchFocus").addEventListener("click", () => { document.getElementById("shop").scrollIntoView({ behavior: "smooth" }); searchInput.focus({ preventScroll: true }); });
+    document.getElementById("openCart").addEventListener("click", () => setCartOpen(true));
+    document.getElementById("closeCart").addEventListener("click", () => setCartOpen(false));
+    document.getElementById("overlay").addEventListener("click", () => setCartOpen(false));
+    document.addEventListener("keydown", event => { if (event.key === "Escape") setCartOpen(false); });
+    document.getElementById("checkoutButton").addEventListener("click", () => {
+      const order = [...cart].map(([id, quantity]) => ({ id, quantity }));
+      for (const line of order) {
+        const product = products.find(item => item.id === line.id);
+        if (line.quantity > product.stock) return notify(`Checkout stopped: ${product.name} stock changed. Please review your bag.`);
+      }
+      setCheckoutView(true);
+    });
+    document.getElementById("backToCart").addEventListener("click", () => setCheckoutView(false));
+    document.getElementById("checkoutForm").addEventListener("submit", event => {
+      event.preventDefault();
+      const order = [...cart].map(([id, quantity]) => ({ id, quantity }));
+      for (const line of order) {
+        const product = products.find(item => item.id === line.id);
+        if (line.quantity > product.stock) {
+          setCheckoutView(false);
+          return notify(`Checkout stopped: ${product.name} stock changed. Please review your bag.`);
+        }
+      }
+      const paymentMethod = new FormData(event.currentTarget).get("payment");
+      for (const line of order) products.find(item => item.id === line.id).stock -= line.quantity;
+      cart.clear();
+      renderCart();
+      renderProducts();
+      event.currentTarget.reset();
+      setCheckoutView(false);
+      setCartOpen(false);
+      notify(`Demo order placed with ${paymentMethod}. Inventory updated successfully.`);
+    });
+    document.querySelectorAll("[data-filter-link]").forEach(link => link.addEventListener("click", () => {
+      activeCategory = link.dataset.filterLink;
+      renderCategories();
+      renderProducts();
+    }));
+    document.getElementById("labToggle").addEventListener("click", event => {
+      const panel = document.getElementById("labPanel");
+      const open = panel.classList.toggle("open");
+      event.currentTarget.setAttribute("aria-expanded", String(open));
+    });
+    document.getElementById("runRace").addEventListener("click", () => {
+      const output = document.getElementById("labOutput");
+      const safe = document.getElementById("isolationSelect").value === "optimistic";
+      output.innerHTML = safe
+        ? `<span class="dim">BEGIN TRANSACTION · isolation: optimistic</span><br>Rider A reads stock=1, version=7<br>Rider B reads stock=1, version=7<br><span class="ok">Rider A: UPDATE inventory WHERE version=7 → 1 row</span><br><span class="ok">COMMIT · stock=0, version=8 · order accepted</span><br><span class="warn">Rider B: UPDATE inventory WHERE version=7 → 0 rows</span><br><span class="warn">ROLLBACK · conflict detected · order rejected</span>`
+        : `<span class="dim">BEGIN TRANSACTION · no locking</span><br>Rider A reads stock=1<br>Rider B reads stock=1<br><span class="warn">Rider A writes stock=0 · order accepted</span><br><span class="warn">Rider B writes stock=0 · order accepted</span><br><span class="warn">ANOMALY · two orders accepted for one item</span><br><span class="dim">Lost update / oversell risk demonstrated</span>`;
+    });
+    renderCategories();
+    renderProducts();
+    renderCart();
+  </script>
+</body>
+</html>
